@@ -7,7 +7,7 @@ Siap deploy ke Vercel.
 
 | Menu | Isi |
 |---|---|
-| 🏠 Dashboard | Hitung mundur, progres checklist, tabungan, budget, vendor, dokumen, tamu, tugas terlambat |
+| 🏠 Dashboard | Hitung mundur, progres checklist, tabungan, budget, vendor, dokumen, tamu, tugas terlambat. |
 | ✅ Checklist | ±45 tugas otomatis dari 12 bulan → hari H (menyesuaikan agama), PIC, tambah/hapus |
 | 💰 Budget | 11 kategori dengan persentase saran, catat DP/termin/lunas (bisa dikaitkan ke vendor), sisa dana, cetak |
 | 🐷 Tabungan | Target = total budget, setoran per orang, kebutuhan per bulan, proyeksi tercapai/tidak |
