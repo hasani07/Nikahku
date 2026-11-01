@@ -13,7 +13,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         daysLeft={daysUntil(wedding.wedding_date)}
         signOut={signOut}
       />
-      <main className="mx-auto w-full min-w-0 max-w-5xl flex-1 px-4 pb-28 pt-5 md:px-8 md:pb-10 md:pt-8">
+      <main className="mx-auto w-full min-w-0 max-w-5xl flex-1 px-3 pb-32 pt-4 md:px-6 md:pb-10 md:pt-6">
         {children}
       </main>
     </div>

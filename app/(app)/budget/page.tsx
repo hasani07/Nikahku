@@ -81,7 +81,7 @@ export default async function BudgetPage() {
                     <span>{rupiah(spent)} terpakai</span>
                     <span className={pct > 100 ? "text-red-600" : ""}>{pct}%</span>
                   </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-stone-100">
+                  <div className="h-2 overflow-hidden rounded-full bg-white/60 shadow-[inset_0_1px_2px_rgba(136,19,55,0.12)]">
                     <div className={`h-full ${pct > 100 ? "bg-red-500" : "bg-rose-500"}`} style={{ width: `${Math.min(pct, 100)}%` }} />
                   </div>
                 </div>

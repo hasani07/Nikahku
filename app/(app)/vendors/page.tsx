@@ -67,10 +67,10 @@ export default async function VendorsPage({
       </details>
 
       <div className={chipRow}>
-        <a href="/vendors" className={`rounded-full px-3 py-1 ${!cat ? "bg-rose-600 text-white" : "border border-stone-200 bg-white"}`}>Semua</a>
+        <a href="/vendors" className={`rounded-full px-3 py-1 ${!cat ? "btn-liquid" : "glass-pill text-stone-700"}`}>Semua</a>
         {categories.filter((x) => all.some((y) => y.category_id === x.id)).map((x) => (
           <a key={x.id} href={`/vendors?cat=${x.id}`}
-             className={`rounded-full px-3 py-1 ${cat === x.id ? "bg-rose-600 text-white" : "border border-stone-200 bg-white"}`}>
+             className={`rounded-full px-3 py-1 ${cat === x.id ? "btn-liquid" : "glass-pill text-stone-700"}`}>
             {x.name}
           </a>
         ))}

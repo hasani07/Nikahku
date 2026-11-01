@@ -56,7 +56,7 @@ export default async function ChecklistPage() {
                       <button
                         aria-label="Tandai selesai"
                         className={`mt-0.5 flex h-6 w-6 items-center justify-center rounded-md border text-sm transition active:scale-90 md:mt-0 md:h-5 md:w-5 md:text-xs ${
-                          isDone ? "border-rose-600 bg-rose-600 text-white" : "border-stone-300 bg-white"
+                          isDone ? "border-rose-600 btn-liquid" : "border-stone-300 bg-white"
                         }`}
                       >
                         {isDone ? "✓" : ""}

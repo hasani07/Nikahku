@@ -75,12 +75,12 @@ export default async function GuestsPage({
       </details>
 
       <div className={chipRow}>
-        <a href="/guests" className={`rounded-full px-3 py-1 ${!group ? "bg-rose-600 text-white" : "bg-white border border-stone-200"}`}>Semua</a>
+        <a href="/guests" className={`rounded-full px-3 py-1 ${!group ? "btn-liquid" : "glass-pill text-stone-700"}`}>Semua</a>
         {GROUPS.filter((g) => all.some((x) => x.group_name === g)).map((g) => (
           <a
             key={g}
             href={`/guests?group=${encodeURIComponent(g)}`}
-            className={`rounded-full px-3 py-1 ${group === g ? "bg-rose-600 text-white" : "bg-white border border-stone-200"}`}
+            className={`rounded-full px-3 py-1 ${group === g ? "btn-liquid" : "glass-pill text-stone-700"}`}
           >
             {g} ({sum(all.filter((x) => x.group_name === g))})
           </a>

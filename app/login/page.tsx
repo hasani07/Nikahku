@@ -13,12 +13,12 @@ export default async function LoginPage({
 
   return (
     <main className="mx-auto flex min-h-screen max-w-sm flex-col justify-center px-6">
-      <Link href="/" className="mb-6 text-center text-xl font-semibold text-rose-700">💍 NikahKu</Link>
+      <Link href="/" className="mb-6 flex items-center justify-center gap-2 text-xl font-bold"><span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-400 to-rose-600">💍</span>NikahKu</Link>
 
-      <div className={card + " space-y-4"}>
-        <div className="grid grid-cols-2 rounded-lg bg-stone-100 p-1 text-sm">
-          <Link href={qs("masuk")} className={`rounded-md py-2 text-center ${!isSignup ? "bg-white font-medium shadow-sm" : "text-stone-500"}`}>Masuk</Link>
-          <Link href={qs("daftar")} className={`rounded-md py-2 text-center ${isSignup ? "bg-white font-medium shadow-sm" : "text-stone-500"}`}>Daftar</Link>
+      <div className={card + " glass-strong space-y-4 !rounded-[32px]"}>
+        <div className="glass-pill grid grid-cols-2 rounded-full p-1 text-sm">
+          <Link href={qs("masuk")} className={`rounded-full py-2 text-center transition ${!isSignup ? "bg-white/90 font-semibold text-rose-700 shadow-sm" : "text-stone-500"}`}>Masuk</Link>
+          <Link href={qs("daftar")} className={`rounded-full py-2 text-center transition ${isSignup ? "bg-white/90 font-semibold text-rose-700 shadow-sm" : "text-stone-500"}`}>Daftar</Link>
         </div>
 
         <form action={isSignup ? signup : login} className="space-y-4">

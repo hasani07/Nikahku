@@ -6,7 +6,7 @@ import type { Doc, Expense, Guest, Task } from "@/lib/types";
 
 function Bar({ pct, color = "bg-rose-500" }: { pct: number; color?: string }) {
   return (
-    <div className="h-2 w-full overflow-hidden rounded-full bg-stone-100">
+    <div className="h-2 w-full overflow-hidden rounded-full bg-white/60 shadow-[inset_0_1px_2px_rgba(136,19,55,0.12)]">
       <div className={`h-full ${color}`} style={{ width: `${Math.min(100, Math.max(0, pct))}%` }} />
     </div>
   );
@@ -49,51 +49,58 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl bg-gradient-to-br from-rose-500 to-rose-700 p-6 text-white shadow">
-        <p className="text-sm opacity-90">
-          {wedding.groom_name} &amp; {wedding.bride_name} · {formatDate(wedding.wedding_date)}
-          {wedding.city ? ` · ${wedding.city}` : ""}
-        </p>
-        <p className="mt-2 text-3xl font-bold md:text-4xl">
-          {days > 0 ? `${days} hari lagi` : days === 0 ? "Hari ini! 🎉" : "Selamat menempuh hidup baru 💕"}
-        </p>
-        <div className="mt-4 max-w-md">
-          <div className="mb-1 flex justify-between text-sm"><span>Progres persiapan</span><span>{taskPct}%</span></div>
-          <div className="h-2 overflow-hidden rounded-full bg-white/30">
-            <div className="h-full bg-white" style={{ width: `${taskPct}%` }} />
+      <section className="relative overflow-hidden rounded-[32px] border border-white/40 bg-gradient-to-br from-rose-500 via-pink-500 to-amber-400 p-6 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_24px_48px_-20px_rgba(225,29,72,0.65)] md:p-8">
+        {/* bola cahaya cair */}
+        <div className="float pointer-events-none absolute -right-10 -top-16 h-56 w-56 rounded-full bg-white/25 blur-2xl" />
+        <div className="pointer-events-none absolute -bottom-20 left-10 h-48 w-48 rounded-full bg-fuchsia-400/40 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/25 via-transparent to-transparent" />
+
+        <div className="relative">
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/20 px-3 py-1 text-xs font-medium backdrop-blur-md">
+            💍 {wedding.groom_name} &amp; {wedding.bride_name} · {formatDate(wedding.wedding_date)}
+            {wedding.city ? ` · ${wedding.city}` : ""}
+          </p>
+          <p className="mt-4 text-4xl font-extrabold tracking-tight drop-shadow-sm md:text-5xl">
+            {days > 0 ? <>{days} <span className="text-2xl font-semibold opacity-90 md:text-3xl">hari lagi</span></> : days === 0 ? "Hari ini! 🎉" : "Selamat menempuh hidup baru 💕"}
+          </p>
+          <div className="mt-6 max-w-md rounded-2xl border border-white/30 bg-white/15 p-3 backdrop-blur-md">
+            <div className="mb-1.5 flex justify-between text-sm"><span>Progres persiapan</span><span className="font-semibold">{taskPct}%</span></div>
+            <div className="h-2.5 overflow-hidden rounded-full bg-white/25 shadow-[inset_0_1px_2px_rgba(0,0,0,0.15)]">
+              <div className="h-full rounded-full bg-gradient-to-r from-white to-white/80 shadow-[0_0_10px_rgba(255,255,255,0.8)] transition-all duration-700" style={{ width: `${taskPct}%` }} />
+            </div>
           </div>
         </div>
       </section>
 
       <section className="grid gap-4 md:grid-cols-3">
-        <Link href="/savings" className={card + " block hover:border-rose-300"}>
+        <Link href="/savings" className={card + " block glass-hover"}>
           <p className="text-sm text-stone-500">Tabungan nikah</p>
           <p className="my-1 text-xl font-semibold">{rupiah(saved)}</p>
           <p className="mb-2 text-xs text-stone-500">{savedPct}% dari target {rupiah(wedding.total_budget)}</p>
           <Bar pct={savedPct} color="bg-amber-500" />
         </Link>
-        <Link href="/vendors" className={card + " block hover:border-rose-300"}>
+        <Link href="/vendors" className={card + " block glass-hover"}>
           <p className="text-sm text-stone-500">Vendor</p>
           <p className="my-1 text-xl font-semibold">{booked} di-booking</p>
           <p className="text-xs text-stone-500">{v.length - booked} kandidat lain sedang disurvei</p>
         </Link>
-        <Link href="/invitation" className={card + " block hover:border-rose-300"}>
+        <Link href="/invitation" className={card + " block glass-hover"}>
           <p className="text-sm text-stone-500">Undangan digital</p>
           <p className="my-1 text-xl font-semibold">{wedding.invitation?.published ? "Sudah terbit 💌" : "Belum terbit"}</p>
           <p className="text-xs text-stone-500">{wedding.slug ? `/u/${wedding.slug}` : "Atur link undangan"}</p>
         </Link>
-        <Link href="/budget" className={card + " block hover:border-rose-300"}>
+        <Link href="/budget" className={card + " block glass-hover"}>
           <p className="text-sm text-stone-500">Budget terpakai</p>
           <p className="my-1 text-xl font-semibold">{rupiah(spent)}</p>
           <p className="mb-2 text-xs text-stone-500">dari {rupiah(wedding.total_budget)} · sisa {rupiah(wedding.total_budget - spent)}</p>
           <Bar pct={budgetPct} color={budgetPct > 100 ? "bg-red-500" : "bg-rose-500"} />
         </Link>
-        <Link href="/documents" className={card + " block hover:border-rose-300"}>
+        <Link href="/documents" className={card + " block glass-hover"}>
           <p className="text-sm text-stone-500">Dokumen nikah</p>
           <p className="my-1 text-xl font-semibold">{docsDone} / {d.length} selesai</p>
           <Bar pct={d.length ? (docsDone / d.length) * 100 : 0} color="bg-emerald-500" />
         </Link>
-        <Link href="/guests" className={card + " block hover:border-rose-300"}>
+        <Link href="/guests" className={card + " block glass-hover"}>
           <p className="text-sm text-stone-500">Tamu</p>
           <p className="my-1 text-xl font-semibold">{invited} orang diundang</p>
           <p className="text-xs text-stone-500">{confirmed} konfirmasi hadir · target {wedding.estimated_guests ?? "-"}</p>

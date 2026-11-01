@@ -44,7 +44,7 @@ export default async function SavingsPage() {
           </div>
           <p className="text-3xl font-bold text-rose-600">{pct}%</p>
         </div>
-        <div className="h-3 overflow-hidden rounded-full bg-stone-100">
+        <div className="h-3 overflow-hidden rounded-full bg-white/60 shadow-[inset_0_1px_2px_rgba(136,19,55,0.12)]">
           <div className="h-full bg-rose-500" style={{ width: `${pct}%` }} />
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
