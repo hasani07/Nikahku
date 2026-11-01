@@ -1,6 +1,6 @@
 import { requireWedding } from "@/lib/wedding";
 import { formatDate, rupiah, todayISO } from "@/lib/format";
-import { btn, btnDanger, btnGhost, card, input } from "@/lib/ui";
+import { btn, btnDanger, btnGhost, card, input, tableWrap } from "@/lib/ui";
 import type { BudgetCategory, Expense, Vendor } from "@/lib/types";
 import PrintButton from "@/components/PrintButton";
 import { addCategory, addExpense, deleteExpense, updatePlanned, updateTotalBudget } from "./actions";
@@ -31,11 +31,11 @@ export default async function BudgetPage() {
   return (
     <div className="space-y-6">
       <header className="flex items-end justify-between">
-        <h1 className="text-2xl font-bold">Budget planner</h1>
+        <h1 className="text-xl font-bold md:text-2xl">Budget planner</h1>
         <PrintButton />
       </header>
 
-      <section className="grid gap-4 md:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
         <form action={updateTotalBudget} className={card}>
           <p className="text-sm text-stone-500">Total budget</p>
           <div className="mt-1 flex gap-2">
@@ -119,7 +119,7 @@ export default async function BudgetPage() {
           <button className={btn}>Simpan</button>
         </form>
 
-        <table className="mt-4 w-full text-sm">
+        <div className={tableWrap}><table className="min-w-[560px] mt-4 w-full text-sm">
           <thead className="text-left text-xs text-stone-500">
             <tr><th className="py-2">Tanggal</th><th>Keterangan</th><th>Kategori</th><th>Jenis</th><th className="text-right">Nominal</th><th /></tr>
           </thead>
@@ -145,7 +145,7 @@ export default async function BudgetPage() {
               <tr><td colSpan={6} className="py-3 text-stone-400">Belum ada pembayaran tercatat.</td></tr>
             )}
           </tbody>
-        </table>
+        </table></div>
       </section>
     </div>
   );

@@ -22,7 +22,7 @@ export default async function ChecklistPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold">Checklist persiapan</h1>
+        <h1 className="text-xl font-bold md:text-2xl">Checklist persiapan</h1>
         <p className="text-sm text-stone-500">{done} dari {tasks.length} tugas selesai</p>
       </header>
 
@@ -51,29 +51,33 @@ export default async function ChecklistPage() {
                 const isDone = t.status === "done";
                 const late = !isDone && t.due_date && t.due_date < today;
                 return (
-                  <li key={t.id} className="flex flex-wrap items-center gap-3 py-2">
+                  <li key={t.id} className="flex items-start gap-3 py-3 md:items-center md:py-2">
                     <form action={toggleTask.bind(null, t.id, t.status)}>
                       <button
                         aria-label="Tandai selesai"
-                        className={`flex h-5 w-5 items-center justify-center rounded border text-xs ${
+                        className={`mt-0.5 flex h-6 w-6 items-center justify-center rounded-md border text-sm transition active:scale-90 md:mt-0 md:h-5 md:w-5 md:text-xs ${
                           isDone ? "border-rose-600 bg-rose-600 text-white" : "border-stone-300 bg-white"
                         }`}
                       >
                         {isDone ? "✓" : ""}
                       </button>
                     </form>
-                    <span className={`flex-1 text-sm ${isDone ? "text-stone-400 line-through" : ""}`}>{t.title}</span>
-                    <form action={updateAssignee.bind(null, t.id)} className="flex items-center gap-1">
-                      <input
-                        name="assignee"
-                        defaultValue={t.assignee ?? ""}
-                        placeholder="PIC"
-                        className="w-24 rounded border border-transparent px-2 py-1 text-xs hover:border-stone-200 focus:border-rose-300 focus:outline-none"
-                      />
-                    </form>
-                    <span className={`w-24 text-right text-xs ${late ? "font-medium text-red-600" : "text-stone-500"}`}>
-                      {formatDate(t.due_date)}
-                    </span>
+                    <div className="min-w-0 flex-1 md:flex md:items-center md:gap-3">
+                      <p className={`text-sm md:flex-1 ${isDone ? "text-stone-400 line-through" : ""}`}>{t.title}</p>
+                      <div className="mt-1 flex items-center gap-2 md:mt-0">
+                        <span className={`text-xs md:order-2 md:w-24 md:text-right ${late ? "font-medium text-red-600" : "text-stone-500"}`}>
+                          {late ? "⚠️ " : "📅 "}{formatDate(t.due_date)}
+                        </span>
+                        <form action={updateAssignee.bind(null, t.id)} className="md:order-1">
+                          <input
+                            name="assignee"
+                            defaultValue={t.assignee ?? ""}
+                            placeholder="+ PIC"
+                            className="w-24 rounded border border-transparent bg-transparent px-1.5 py-0.5 text-xs text-stone-600 hover:border-stone-200 focus:border-rose-300 focus:outline-none"
+                          />
+                        </form>
+                      </div>
+                    </div>
                     <form action={deleteTask.bind(null, t.id)}>
                       <button className={btnDanger} aria-label="Hapus">✕</button>
                     </form>

@@ -1,6 +1,6 @@
 import { requireWedding } from "@/lib/wedding";
 import { formatDate } from "@/lib/format";
-import { btn, btnDanger, btnGhost, card, input } from "@/lib/ui";
+import { btn, btnDanger, btnGhost, card, input, tableWrap } from "@/lib/ui";
 import PrintButton from "@/components/PrintButton";
 import type { RundownItem } from "@/lib/types";
 import { addRundown, deleteRundown, seedRundown } from "./actions";
@@ -26,7 +26,7 @@ export default async function RundownPage() {
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h1 className="text-2xl font-bold">Rundown acara</h1>
+          <h1 className="text-xl font-bold md:text-2xl">Rundown acara</h1>
           <p className="text-sm text-stone-500">
             {wedding.groom_name} &amp; {wedding.bride_name} · {formatDate(wedding.wedding_date)}
           </p>
@@ -57,7 +57,7 @@ export default async function RundownPage() {
         return (
           <section key={session} className={card}>
             <h2 className="mb-3 font-semibold">{title}</h2>
-            <table className="w-full text-sm">
+            <div className={tableWrap}><table className="min-w-[560px] w-full text-sm">
               <thead className="text-left text-xs text-stone-500">
                 <tr><th className="w-32 py-1">Waktu</th><th>Kegiatan</th><th>PIC</th><th>Lokasi</th><th className="no-print" /></tr>
               </thead>
@@ -74,7 +74,7 @@ export default async function RundownPage() {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table></div>
           </section>
         );
       })}

@@ -28,7 +28,7 @@ export default function Home() {
           Satu tempat untuk checklist, budget, dokumen nikah, dan daftar tamu — bisa dikerjakan
           bareng pasangan.
         </p>
-        <Link href="/login" className={btn + " px-6 py-3 text-base"}>Mulai gratis</Link>
+        <Link href="/login?mode=daftar" className={btn + " px-6 py-3 text-base"}>Mulai gratis</Link>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">

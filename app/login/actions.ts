@@ -17,8 +17,8 @@ function safeNext(fd: FormData) {
   return next.startsWith("/") && !next.startsWith("//") ? next : "";
 }
 
-function back(msg: string, next: string) {
-  const qs = new URLSearchParams({ message: msg });
+function back(msg: string, next: string, mode: "masuk" | "daftar") {
+  const qs = new URLSearchParams({ message: msg, mode });
   if (next) qs.set("next", next);
   return `/login?${qs.toString()}`;
 }
@@ -27,7 +27,12 @@ export async function login(fd: FormData) {
   const supabase = await createClient();
   const next = safeNext(fd);
   const { error } = await supabase.auth.signInWithPassword(creds(fd));
-  if (error) redirect(back("Email atau password salah.", next));
+  if (error) {
+    const msg = error.message.toLowerCase().includes("not confirmed")
+      ? "Email belum dikonfirmasi. Cek inbox/spam kamu."
+      : "Email atau password salah.";
+    redirect(back(msg, next, "masuk"));
+  }
   redirect(next || "/dashboard");
 }
 
@@ -39,7 +44,13 @@ export async function signup(fd: FormData) {
     ...creds(fd),
     options: { emailRedirectTo: `${origin}/auth/callback${next ? `?next=${encodeURIComponent(next)}` : ""}` },
   });
-  if (error) redirect(back(error.message, next));
+  if (error) {
+    const msg = error.message.toLowerCase().includes("already registered")
+      ? "Email ini sudah terdaftar, silakan masuk."
+      : error.message;
+    redirect(back(msg, next, "daftar"));
+  }
+  // jika "Confirm email" dimatikan di Supabase → langsung login
   if (data.session) redirect(next || "/onboarding");
-  redirect(back("Cek email kamu untuk konfirmasi akun, lalu masuk.", next));
+  redirect(back("Akun dibuat! Cek email untuk konfirmasi, lalu masuk.", next, "masuk"));
 }

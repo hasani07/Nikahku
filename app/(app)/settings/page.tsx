@@ -25,7 +25,7 @@ export default async function SettingsPage({
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Pengaturan</h1>
+      <h1 className="text-xl font-bold md:text-2xl">Pengaturan</h1>
       {saved && <p className="rounded-lg bg-emerald-50 p-3 text-sm text-emerald-700">Tersimpan ✓</p>}
 
       <form action={updateWedding} className={card + " grid gap-4 md:grid-cols-2"}>

@@ -54,7 +54,7 @@ export default async function DashboardPage() {
           {wedding.groom_name} &amp; {wedding.bride_name} · {formatDate(wedding.wedding_date)}
           {wedding.city ? ` · ${wedding.city}` : ""}
         </p>
-        <p className="mt-2 text-4xl font-bold">
+        <p className="mt-2 text-3xl font-bold md:text-4xl">
           {days > 0 ? `${days} hari lagi` : days === 0 ? "Hari ini! 🎉" : "Selamat menempuh hidup baru 💕"}
         </p>
         <div className="mt-4 max-w-md">

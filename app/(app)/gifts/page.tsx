@@ -1,6 +1,6 @@
 import { requireWedding } from "@/lib/wedding";
 import { rupiah } from "@/lib/format";
-import { btn, btnDanger, card, input } from "@/lib/ui";
+import { btn, btnDanger, card, input, tableWrap } from "@/lib/ui";
 import PrintButton from "@/components/PrintButton";
 import type { Gift } from "@/lib/types";
 import { addGift, deleteGift, toggleThanked } from "./actions";
@@ -22,7 +22,7 @@ export default async function GiftsPage() {
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h1 className="text-2xl font-bold">Rekap amplop &amp; hadiah</h1>
+          <h1 className="text-xl font-bold md:text-2xl">Rekap amplop &amp; hadiah</h1>
           <p className="text-sm text-stone-500">
             {gifts.length} pemberian · total uang {rupiah(total)} · {thanked}/{gifts.length} sudah diberi ucapan terima kasih
           </p>
@@ -41,7 +41,7 @@ export default async function GiftsPage() {
       </form>
 
       <section className={card}>
-        <table className="w-full text-sm">
+        <div className={tableWrap}><table className="min-w-[560px] w-full text-sm">
           <thead className="text-left text-xs text-stone-500">
             <tr><th className="py-2">Dari</th><th>Jenis</th><th>Keterangan</th><th className="text-right">Nominal</th><th className="text-center">Terima kasih</th><th className="no-print" /></tr>
           </thead>
@@ -64,7 +64,7 @@ export default async function GiftsPage() {
             ))}
             {gifts.length === 0 && <tr><td colSpan={6} className="py-3 text-stone-400">Belum ada catatan. Isi setelah acara selesai.</td></tr>}
           </tbody>
-        </table>
+        </table></div>
       </section>
     </div>
   );

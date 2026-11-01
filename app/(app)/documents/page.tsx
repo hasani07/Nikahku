@@ -38,7 +38,7 @@ export default async function DocumentsPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold">Dokumen nikah</h1>
+        <h1 className="text-xl font-bold md:text-2xl">Dokumen nikah</h1>
         <p className="text-sm text-stone-500">
           {done} dari {docs.length} selesai · syarat bisa berbeda tiap daerah, cek ulang ke {office} setempat.
         </p>

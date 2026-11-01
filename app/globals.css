@@ -3,8 +3,54 @@
 body {
   background: #fff8f8;
   color: #292524;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* iOS men-zoom otomatis bila font input < 16px → paksa 16px di layar kecil */
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ---------- Animasi ---------- */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+.page-enter { animation: page-enter 0.28s ease-out both; }
+
+@keyframes progress {
+  0%   { width: 0%; }
+  20%  { width: 35%; }
+  60%  { width: 70%; }
+  100% { width: 92%; }
+}
+.progress-bar { animation: progress 6s cubic-bezier(0.1, 0.7, 0.3, 1) forwards; }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+.toast-in { animation: toast-in 0.2s ease-out both; }
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #fbe4e6 0%, #fff1f2 50%, #fbe4e6 100%);
+  background-size: 800px 100%;
+  animation: shimmer 1.3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter, .progress-bar, .toast-in, .skeleton { animation: none; }
+}
+
+/* ---------- Cetak ---------- */
 @media print {
   aside,
   .no-print {

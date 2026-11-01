@@ -33,7 +33,7 @@ export default async function SavingsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Target tabungan nikah</h1>
+      <h1 className="text-xl font-bold md:text-2xl">Target tabungan nikah</h1>
 
       <section className={card}>
         <div className="mb-2 flex flex-wrap items-end justify-between gap-2">

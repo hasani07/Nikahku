@@ -30,7 +30,7 @@ export default async function HariHPage({
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold">Mode Hari H 🎉</h1>
+        <h1 className="text-xl font-bold md:text-2xl">Mode Hari H 🎉</h1>
         <p className="text-sm text-stone-500">Untuk panitia penerima tamu — buka di HP.</p>
       </header>
 

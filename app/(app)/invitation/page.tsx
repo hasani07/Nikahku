@@ -38,7 +38,7 @@ export default async function InvitationEditorPage({
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold">Undangan digital</h1>
+        <h1 className="text-xl font-bold md:text-2xl">Undangan digital</h1>
         <p className="text-sm text-stone-500">Buat halaman undangan, sebar link personal per tamu, dan terima RSVP + ucapan secara online.</p>
       </header>
 

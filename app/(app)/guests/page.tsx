@@ -1,5 +1,5 @@
 import { requireWedding } from "@/lib/wedding";
-import { btn, btnDanger, btnGhost, card, input } from "@/lib/ui";
+import { btn, btnDanger, btnGhost, card, input, chipRow } from "@/lib/ui";
 import type { Guest } from "@/lib/types";
 import { addGuest, bulkAddGuests, deleteGuest, setRsvp } from "./actions";
 
@@ -34,9 +34,9 @@ export default async function GuestsPage({
   return (
     <div className="space-y-6">
       <header>
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Daftar tamu</h1>
-          <a href="/guests/export" className={btnGhost}>⬇️ Export CSV / Excel</a>
+        <div className="flex items-center justify-between gap-2">
+          <h1 className="text-xl font-bold md:text-2xl">Daftar tamu</h1>
+          <a href="/guests/export" className={btnGhost}>⬇️ Export</a>
         </div>
         <p className="text-sm text-stone-500">
           {all.length} undangan · {invited} orang
@@ -74,7 +74,7 @@ export default async function GuestsPage({
         </form>
       </details>
 
-      <div className="flex flex-wrap gap-2 text-sm">
+      <div className={chipRow}>
         <a href="/guests" className={`rounded-full px-3 py-1 ${!group ? "bg-rose-600 text-white" : "bg-white border border-stone-200"}`}>Semua</a>
         {GROUPS.filter((g) => all.some((x) => x.group_name === g)).map((g) => (
           <a
@@ -87,7 +87,37 @@ export default async function GuestsPage({
         ))}
       </div>
 
-      <section className={card + " overflow-x-auto"}>
+      {/* Tampilan kartu untuk HP */}
+      <ul className="space-y-2 md:hidden">
+        {guests.map((g) => (
+          <li key={g.id} className={card + " !p-3"}>
+            <div className="flex items-start justify-between gap-2">
+              <div className="min-w-0">
+                <p className="truncate font-medium">{g.name}</p>
+                <p className="text-xs text-stone-500">{g.group_name ?? "Tanpa grup"} · {g.pax} orang</p>
+              </div>
+              <form action={deleteGuest.bind(null, g.id)}><button className={btnDanger} aria-label="Hapus">✕</button></form>
+            </div>
+            <div className="mt-2 flex items-center gap-2">
+              {g.phone && (
+                <a href={waLink(g.phone)} target="_blank" className="rounded-lg bg-emerald-50 px-3 py-1.5 text-xs text-emerald-700">💬 WA</a>
+              )}
+              <form action={setRsvp.bind(null, g.id)} className="ml-auto flex gap-1">
+                <select name="rsvp_status" defaultValue={g.rsvp_status} className="rounded-lg border border-stone-200 px-2 py-1.5 text-xs">
+                  <option value="pending">Belum jawab</option>
+                  <option value="hadir">Hadir</option>
+                  <option value="tidak">Tidak hadir</option>
+                </select>
+                <button className="rounded-lg bg-rose-600 px-3 text-xs text-white">✓</button>
+              </form>
+            </div>
+          </li>
+        ))}
+        {guests.length === 0 && <li className="text-sm text-stone-400">Belum ada tamu.</li>}
+      </ul>
+
+      {/* Tampilan tabel untuk laptop */}
+      <section className={card + " hidden overflow-x-auto md:block"}>
         <table className="w-full text-sm">
           <thead className="text-left text-xs text-stone-500">
             <tr><th className="py-2">Nama</th><th>WhatsApp</th><th>Grup</th><th>Jml</th><th>RSVP</th><th /></tr>

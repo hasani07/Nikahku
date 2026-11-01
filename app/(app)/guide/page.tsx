@@ -72,7 +72,7 @@ export default function GuidePage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold">Panduan persiapan nikah</h1>
+        <h1 className="text-xl font-bold md:text-2xl">Panduan persiapan nikah</h1>
         <p className="text-sm text-stone-500">Ringkasan praktis. Timeline lengkap ada di <Link href="/checklist" className="text-rose-600">Checklist</Link>.</p>
       </header>
 

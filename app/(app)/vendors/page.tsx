@@ -1,7 +1,7 @@
 import { requireWedding } from "@/lib/wedding";
 import { rupiah } from "@/lib/format";
 import { waLink } from "@/lib/origin";
-import { btn, btnDanger, btnGhost, card, input } from "@/lib/ui";
+import { btn, btnDanger, btnGhost, card, input, chipRow } from "@/lib/ui";
 import type { BudgetCategory, Expense, Vendor } from "@/lib/types";
 import { addVendor, deleteVendor, payVendor, updateVendor } from "./actions";
 
@@ -41,7 +41,7 @@ export default async function VendorsPage({
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold">Vendor</h1>
+        <h1 className="text-xl font-bold md:text-2xl">Vendor</h1>
         <p className="text-sm text-stone-500">
           {active.length} vendor di-booking · kontrak {rupiah(totalQuote)} · dibayar {rupiah(totalPaid)} · sisa tagihan{" "}
           <b>{rupiah(totalQuote - totalPaid)}</b>
@@ -66,7 +66,7 @@ export default async function VendorsPage({
         </form>
       </details>
 
-      <div className="flex flex-wrap gap-2 text-sm">
+      <div className={chipRow}>
         <a href="/vendors" className={`rounded-full px-3 py-1 ${!cat ? "bg-rose-600 text-white" : "border border-stone-200 bg-white"}`}>Semua</a>
         {categories.filter((x) => all.some((y) => y.category_id === x.id)).map((x) => (
           <a key={x.id} href={`/vendors?cat=${x.id}`}
